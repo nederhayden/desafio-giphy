@@ -3,27 +3,33 @@ import api from "../services/api";
 
 export default function Home() {
   // Criando o estado (State)
-  const [giphy, setGiphy] = useState();
+  const [gifs, setGifs] = useState([]);
 
   async function fetchData() {
     // Consumindo a API
     const response = await api.get("/trending");
+
     // Alimentando com os dados da API
-    setGiphy(response.data.giphy);
-    console.log(response.data.giphy);
+    setGifs(response.data.data);
   }
 
-  useEffect(() => fetchData(), []);
+  useEffect(() => fetchData(), [gifs]);
 
-  const renderGifs = () => {
-    return giphy.map((gif) => {
-      return (
-        <div key={gif.id} className="gif">
-          <img src={gif.images.fixed_height.url} alt="" />
-        </div>
-      );
-    });
-  };
+ 
 
-  return <div className="container gifs">{renderGifs()}</div>;
+  return (
+    <div className="container gifs">
+      <input type="text" />
+      <input type="button" value="Search" />
+      <ul>
+      {gifs.map((gif) => {
+        return (
+            <a href={gif.url} key={gif.id}>
+              <img src={gif.images.fixed_height.url} alt="" />
+            </a>
+        );
+      })}
+      </ul>      
+    </div>
+  );
 }
