@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
+import Gifs from "../components/gifs";
 
 export default function Home() {
   // Criando o estado (State)
@@ -15,21 +16,14 @@ export default function Home() {
 
   useEffect(() => fetchData(), [gifs]);
 
- 
-
   return (
-    <div className="container gifs">
-      <input type="text" />
-      <input type="button" value="Search" />
-      <ul>
-      {gifs.map((gif) => {
-        return (
-            <a href={gif.url} key={gif.id}>
-              <img src={gif.images.fixed_height.url} alt="" />
-            </a>
-        );
-      })}
-      </ul>      
-    </div>
+    <>
+      <form>
+        <input type="text" placeholder="Search Gifs" />
+
+        <button type="submit">Search</button>
+      </form>
+      {gifs && <Gifs gifsInfo={gifs} />}
+    </>
   );
 }
