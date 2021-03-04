@@ -9,12 +9,12 @@ const apiTrending = axios.create({
   },
 });
 
-const apiSearch = axios.create({
-  baseURL: "https://api.giphy.com/v1/gifs",
-  params: {
-    api_key: api_key,
-    // q: search
-  },
-});
+// const apiSearch = axios.create({
+//   baseURL: "https://api.giphy.com/v1/gifs",
+//   params: {
+//     api_key: api_key,
+//     q: search
+//   },
+// });
 
 export default apiTrending;

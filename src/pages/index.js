@@ -44,6 +44,7 @@ export default function Home() {
     event.preventDefault();
     setIsLoading(true);
 
+    // VER COMO MIGRAR PRA PASTA SERVICES
     const response = await axios("https://api.giphy.com/v1/gifs/search", {
       params: {
         api_key: "3ZIhfO2H4JbemWElmw6Id7NM0aTLCHOT",
@@ -57,7 +58,7 @@ export default function Home() {
 
   return (
     <>
-      <form>
+      <form className="form">
         <input
           type="text"
           placeholder="Search Gifs"
@@ -66,11 +67,11 @@ export default function Home() {
         />
 
         <button type="submit" onClick={handleSubmit}>
-          Search
+          <p>Search</p>
         </button>
       </form>
 
-      {renderGifs()}
+      <div className="wrapper">{renderGifs()}</div>
     </>
   );
 }
