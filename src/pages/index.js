@@ -1,64 +1,63 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-
-import apiTrending from "../services/api";
-// import apiSearch from "../services/api";
+import api from "../services/api";
 import Gifs from "../components/gifs";
+import Spinner from "../components/spinner";
 
 export default function Home() {
   // Criando o estado (State)
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  async function fetchData() {
+    setLoading(true);
+
+    // Consumindo a API
+    const response = await api.get("/trending");
+    const results = response.data.data;
+
+    // Alimentando com os dados da API
+    setData(results);
+
+    setLoading(false);
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-
-      // Consumindo a API
-      const response = await apiTrending.get("/trending");
-
-      // Alimentando com os dados da API
-      setData(response.data.data);
-
-      setIsLoading(false);
-    };
     fetchData();
   }, []);
 
   // RENDERIZA OS GIFS
-  const renderGifs = () => {
-    if (isLoading) {
-      return <h1>Loading...</h1>;
+  function renderGifs() {
+    if (loading) {
+      return <Spinner />;
     }
     return <Gifs gifsInfo={data} />;
-  };
+  }
 
   // PEGA O TEXTO DIGITADO PELO USUARIO
-  const handleSearcChange = (event) => {
+  function handleSearcChange(event) {
     setSearch(event.target.value);
-  };
+  }
 
   // RETORNA A PESQUISA DO USUARIO
-  const handleSubmit = async (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
-    setIsLoading(true);
+    setLoading(true);
 
-    // VER COMO MIGRAR PRA PASTA SERVICES
-    const response = await axios("https://api.giphy.com/v1/gifs/search", {
+    const response = await api.get("/search", {
       params: {
-        api_key: "3ZIhfO2H4JbemWElmw6Id7NM0aTLCHOT",
         q: search,
       },
     });
+    const results = response.data.data;
 
-    setData(response.data.data);
-    setIsLoading(false);
-  };
+    setData(results);
+    setLoading(false);
+  }
 
   return (
     <>
-      <form className="form">
+      <form className="form-class">
         <input
           type="text"
           placeholder="Search Gifs"
@@ -70,7 +69,6 @@ export default function Home() {
           <p>Search</p>
         </button>
       </form>
-
       <div className="wrapper">{renderGifs()}</div>
     </>
   );
