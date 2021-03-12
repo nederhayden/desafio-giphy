@@ -6,7 +6,7 @@ export default function Gifs({ gifsInfo }) {
       {gifsInfo.map((gif, index) => {
         return (
           <div key={index}>
-            <img src={gif.images.fixed_height.url} alt="" />
+            <img src={gif.images.original.url} alt="" />
           </div>
         );
       })}
