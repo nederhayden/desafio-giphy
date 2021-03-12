@@ -2,47 +2,88 @@ import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import Gifs from "../components/gifs";
 import Spinner from "../components/spinner";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function Home() {
   // Criando o estado (State)
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [offset, setOffset] = useState(0);
+  const [url, setUrl] = useState("/trending");
+  const [totalCount, setTotalCount] = useState(0);
 
-  async function fetchData() {
+  const arraySize = 28;
+
+  async function fetchGifs() {
     setLoading(true);
 
     // Consumindo a API
-    const response = await api.get("/trending");
-    const results = response.data.data;
+    const response = await api.get(url, {
+      params: {
+        limit: arraySize,
+        offset: offset,
+      },
+    });
 
     // Alimentando com os dados da API
-    setData(results);
-
-    setLoading(false);
+    setOffset(offset + arraySize);
+    setTotalCount(response.data.pagination.total_count);
+    setData((gifs) => [...gifs, ...response.data.data]);
+    setLoading(true);
   }
 
   useEffect(() => {
-    fetchData();
+    fetchGifs();
   }, []);
+
+  async function loadMoreGifs() {
+    if (totalCount > offset) {
+      setLoading(true);
+      setOffset(offset + arraySize);
+
+      const response = await api.get(url, {
+        params: {
+          limit: arraySize,
+          offset: offset,
+        },
+      });
+
+      setData((gifs) => [...gifs, ...response.data.data]);
+      setTotalCount(response.data.pagination.total_count);
+      setLoading(false);
+    } else {
+      <h3>Você viu todos os Gifs jovem padawan!!!</h3>;
+    }
+  }
 
   // RENDERIZA OS GIFS
   function renderGifs() {
-    if (loading) {
-      return <Spinner />;
-    }
-    return <Gifs gifsInfo={data} />;
+    return (
+      <InfiniteScroll
+        className="infinite-scroll"
+        dataLength={data.length}
+        next={loadMoreGifs}
+        hasMore={true}
+        // loader={<h1>...Loading...</h1>}
+      >
+        <Gifs gifsInfo={data} />
+      </InfiniteScroll>
+    );
   }
 
   // PEGA O TEXTO DIGITADO PELO USUARIO
   function handleSearcChange(event) {
+    event.preventDefault();
+
+    setUrl("/search");
     setSearch(event.target.value);
   }
 
   // RETORNA A PESQUISA DO USUARIO
   async function handleSubmit(event) {
     event.preventDefault();
-    setLoading(true);
+    // setLoading(true);
 
     const response = await api.get("/search", {
       params: {
@@ -52,7 +93,7 @@ export default function Home() {
     const results = response.data.data;
 
     setData(results);
-    setLoading(false);
+    // setLoading(false);
   }
 
   return (
@@ -70,6 +111,7 @@ export default function Home() {
         </button>
       </form>
       <div className="wrapper">{renderGifs()}</div>
+      {loading && <Spinner />}
     </>
   );
 }
