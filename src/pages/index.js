@@ -49,9 +49,11 @@ export default function Home() {
         },
       });
 
-      setData((gifs) => [...gifs, ...response.data.data]);
-      setTotalCount(response.data.pagination.total_count);
-      setLoading(false);
+      setTimeout(() => {
+        setData((gifs) => [...gifs, ...response.data.data]);
+        setTotalCount(response.data.pagination.total_count);
+        setLoading(false);
+      }, 1500);
     } else {
       <h3>Você viu todos os Gifs jovem padawan!!!</h3>;
     }
@@ -65,7 +67,7 @@ export default function Home() {
         dataLength={data.length}
         next={loadMoreGifs}
         hasMore={true}
-        // loader={<h1>...Loading...</h1>}
+        loader={<Spinner />}
       >
         <Gifs gifsInfo={data} />
       </InfiniteScroll>
@@ -93,7 +95,6 @@ export default function Home() {
     const results = response.data.data;
 
     setData(results);
-    // setLoading(false);
   }
 
   return (
@@ -111,7 +112,6 @@ export default function Home() {
         </button>
       </form>
       <div className="wrapper">{renderGifs()}</div>
-      {loading && <Spinner />}
     </>
   );
 }
