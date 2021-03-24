@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import Gifs from "../components/gifs";
-import Spinner from "../components/spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Loading from "../assets/loading.gif";
+import "./index.scss";
 
 export default function Home() {
   // Criando o estado (State)
@@ -13,7 +14,7 @@ export default function Home() {
   const [url, setUrl] = useState("/trending");
   const [totalCount, setTotalCount] = useState(0);
 
-  const arraySize = 28;
+  const arraySize = 40;
 
   async function fetchGifs() {
     setLoading(true);
@@ -67,7 +68,6 @@ export default function Home() {
         dataLength={data.length}
         next={loadMoreGifs}
         hasMore={true}
-        loader={<Spinner />}
       >
         <Gifs gifsInfo={data} />
       </InfiniteScroll>
@@ -85,7 +85,7 @@ export default function Home() {
   // RETORNA A PESQUISA DO USUARIO
   async function handleSubmit(event) {
     event.preventDefault();
-    // setLoading(true);
+    setLoading(true);
 
     const response = await api.get("/search", {
       params: {
@@ -112,6 +112,7 @@ export default function Home() {
         </button>
       </form>
       <div className="wrapper">{renderGifs()}</div>
+      <div className="loading-img">{loading && <img src={Loading} />}</div>
     </>
   );
 }
