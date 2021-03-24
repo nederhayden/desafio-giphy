@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
-import Gifs from "../components/gifs";
+import Gifs from "./gifs";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "../assets/loading.gif";
 import "./index.scss";
@@ -77,7 +77,6 @@ export default function Home() {
   // PEGA O TEXTO DIGITADO PELO USUARIO
   function handleSearcChange(event) {
     event.preventDefault();
-
     setUrl("/search");
     setSearch(event.target.value);
   }
@@ -93,7 +92,6 @@ export default function Home() {
       },
     });
     const results = response.data.data;
-
     setData(results);
   }
 
@@ -112,7 +110,7 @@ export default function Home() {
         </button>
       </form>
       <div className="wrapper">{renderGifs()}</div>
-      <div className="loading-img">{loading && <img src={Loading} />}</div>
+      <div className="loading-img">{loading && <img src={Loading} alt=''/>}</div>
     </>
   );
 }

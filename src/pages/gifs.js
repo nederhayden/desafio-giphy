@@ -12,8 +12,13 @@ export default function Gifs({ gifsInfo }) {
 
 function GifItem({ gifItem, index }) {
   return (
-      <div key={index} >
-        <img className='img-gifs'  src={gifItem.images.original.url} alt="" />
-      </div>
+    <div key={index}>
+      <button
+        className="button-gif"
+        onClick={() => console.log(`Gif Clicado - ${gifItem.id}`)}
+      >
+        <img className="img-gifs" src={gifItem.images.original.url} alt="" />
+      </button>
+    </div>
   );
 }
