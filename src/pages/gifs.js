@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ModalView from "../components/Modal_View";
+import { ModalContext } from "../contexts/ModalContext";
 // import GifItem from "../components/Gif_Item";
 
 export default function Gifs({ gifsInfo }) {
-  const [showModal, setShowModal] = useState(false);
+  const { showModal, setShowModal } = useContext(ModalContext);
   const [currentGif, setCurrentGif] = useState();
 
   return (
     <>
       {showModal ? (
-        <ModalView open={showModal} hide={showModal} gif={currentGif} />
+        <ModalView open={showModal} hide={!showModal} gif={currentGif} />
       ) : (
         gifsInfo.map((gif, index) => {
           return (

@@ -3,6 +3,7 @@ import api from "../services/api";
 import Gifs from "./gifs";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "../assets/loading.gif";
+import ModalContextProvider from "../contexts/ModalContext";
 import "./index.scss";
 
 export default function Home() {
@@ -64,14 +65,16 @@ export default function Home() {
   // RENDERIZA OS GIFS
   function renderGifs() {
     return (
-      <InfiniteScroll
-        className="infinite-scroll"
-        dataLength={data.length}
-        next={loadMoreGifs}
-        hasMore={true}
-      >
-        <Gifs gifsInfo={data} />
-      </InfiniteScroll>
+      <ModalContextProvider>
+        <InfiniteScroll
+          className="infinite-scroll"
+          dataLength={data.length}
+          next={loadMoreGifs}
+          hasMore={true}
+        >
+          <Gifs gifsInfo={data} />
+        </InfiniteScroll>
+      </ModalContextProvider>
     );
   }
 
