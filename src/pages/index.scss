@@ -41,13 +41,14 @@
   border-radius: 12px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
   border: 2px solid rgb(32,178,170);
-  width: 248px;
-  height: 140px;
+  width: 250px;
+  height: 150px;
 }
 
 .infinite-scroll {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .loading-img {

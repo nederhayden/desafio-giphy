@@ -15,7 +15,7 @@ export default function Home() {
   const [url, setUrl] = useState("/trending");
   const [totalCount, setTotalCount] = useState(0);
 
-  const arraySize = 40;
+  const arraySize = 42;
 
   async function fetchGifs() {
     setLoading(true);
