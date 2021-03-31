@@ -36,6 +36,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchGifs();
+    // eslint-disable-next-line
   }, []);
 
   async function loadMoreGifs() {
@@ -110,7 +111,9 @@ export default function Home() {
         </button>
       </form>
       <div className="wrapper">{renderGifs()}</div>
-      <div className="loading-img">{loading && <img src={Loading} alt=''/>}</div>
+      <div className="loading-img">
+        {loading && <img src={Loading} alt="" />}
+      </div>
     </>
   );
 }
