@@ -9,10 +9,31 @@
   align-items: center;
   margin: 0;
   padding: 0;
+  background: rgb(32, 178, 170);
+  border: 2px solid rgb(32, 178, 170);
+  border-radius: 4px 4px 0 0;
 }
 
 .modal-img {
   width: auto;
   height: 250px;
   border-radius: 4px;
+}
+
+.modal-button {
+  width: 100px;
+  height: 40px;
+  background-color: white;
+  border-radius: 12px;
+  p {
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(32, 178, 170);
+  }
+}
+
+.modal-footer {
+  background: rgb(32, 178, 170);
+  border: 2px solid rgb(32, 178, 170);
+  border-radius: 0 0 4px 4px;
 }
