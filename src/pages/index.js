@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../services/api";
 import Gifs from "./gifs";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "../assets/loading.gif";
 import ModalContextProvider from "../contexts/ModalContext";
+import AddFavorites from "../components/AddFavorites";
 import "./index.scss";
 
 export default function Home() {
@@ -72,7 +74,7 @@ export default function Home() {
           next={loadMoreGifs}
           hasMore={true}
         >
-          <Gifs gifsInfo={data} />
+          <Gifs gifsInfo={data} favIcon={AddFavorites} />
         </InfiniteScroll>
       </ModalContextProvider>
     );
@@ -102,6 +104,11 @@ export default function Home() {
   return (
     <>
       <form className="form-class">
+        <Link to="/favorites">
+          <button className="btn-favorites">
+            <p>Favorites</p>
+          </button>
+        </Link>
         <input
           type="text"
           placeholder="Search Gifs"
@@ -109,7 +116,7 @@ export default function Home() {
           value={search}
         />
 
-        <button type="submit" onClick={handleSubmit}>
+        <button className="btn-search" type="submit" onClick={handleSubmit}>
           <p>Search</p>
         </button>
       </form>

@@ -4,14 +4,13 @@
   margin: 20px;
 
   input {
-    margin-right: 8px;
+    margin: 0 8px;
     height: 18px;
     width: 300px;
     height: 40px;
-    border-radius: 12px 0 0 12px;
     text-indent: 10px;
   }
-  button {
+  .btn-search {
     width: 100px;
     height: 40px;
     background-color: white;
@@ -19,7 +18,19 @@
     p {
       font-weight: bold;
       font-size: 20px;
-      color: rgb(32,178,170);
+      color: rgb(32, 178, 170);
+    }
+  }
+
+  .btn-favorites {
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    border-radius: 12px 0 0 12px;
+    p {
+      font-weight: bold;
+      font-size: 20px;
+      color: rgb(32, 178, 170);
     }
   }
 }
@@ -34,13 +45,38 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.button-gif:hover .overlay {
+  opacity: 1;
+}
+
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  bottom: 0;
+  font-size: 14px;
+  padding: 14px;
+  text-align: center;
+}
+
+.fav-icon {
+  color: white;
 }
 
 .img-gifs {
   margin: 2px;
   border-radius: 12px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
-  border: 2px solid rgb(32,178,170);
+  border: 2px solid rgb(32, 178, 170);
   width: 250px;
   height: 150px;
 }
