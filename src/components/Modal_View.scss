@@ -6,10 +6,7 @@
 .modal-header {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background: rgb(32, 178, 170);
-  border-radius: 4px 4px 0 0;
-  width: auto;
+  background: #282a36;
   height: 400px;
   position: relative;
 
@@ -23,6 +20,7 @@
     position: absolute;
     bottom: 0;
     line-height: 0.5;
+    color: #fff;
 
     span {
       display: flex;
