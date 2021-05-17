@@ -15,11 +15,20 @@ export default function ModalView({ gif }) {
     >
       <Modal.Header className="modal-header" closeButton>
         <img src={gif.images.original.url} alt="" />
-        <ul>
-          <li>Nome: {gif.username}</li>
-          <li>Altura: {gif.images.original.height}</li>
-          <li>Largura: {gif.images.original.width}</li>
-        </ul>
+        <div>
+          <span>
+            <p>Título:</p>
+            <p>{gif.title}</p>
+          </span>
+          <span>
+            <p>Altura:</p>
+            <p>{gif.images.original.height}</p>
+          </span>
+          <span>
+            <p>Largura:</p>
+            <p>{gif.images.original.width}</p>
+          </span>
+        </div>
       </Modal.Header>
     </Modal>
   );
