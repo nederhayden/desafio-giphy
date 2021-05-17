@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import ModalView from "../components/Modal_View";
 import { ModalContext } from "../contexts/ModalContext";
 
-export default function Gifs({ gifsInfo, favIcon }) {
+export default function Gifs({ gifsInfo }) {
   const { showModal, setShowModal } = useContext(ModalContext); // Pega referencia do context global
   const [currentGif, setCurrentGif] = useState();
   const [favorites, setFavorites] = useState([]);
@@ -17,7 +17,6 @@ export default function Gifs({ gifsInfo, favIcon }) {
             <GifItem
               gifItem={gif}
               key={index}
-              fav={favIcon}
               onClick={() => {
                 setShowModal(!showModal);
                 setCurrentGif(index);
@@ -29,25 +28,29 @@ export default function Gifs({ gifsInfo, favIcon }) {
     </>
   );
 
-  function GifItem({ gifItem, index, fav }) {
-    const FavIcon = fav;
-    const addFavorites = (favGif) => {
-      const newFavoriteList = [...favorites, favGif];
+  function GifItem({ gifItem, index }) {
+    const addFavorites = (gifItem) => {
+      const newFavoriteList = [...favorites, gifItem];
+
       setFavorites(newFavoriteList);
     };
+
     return (
       <div key={index}>
-        <div
-          className="button-gif"
-          onClick={() => {
-            setCurrentGif(gifItem);
-            setShowModal(!showModal);
-          }}
-        >
-          <img className="img-gifs" src={gifItem.images.original.url} alt="" />
-          <div className="overlay" onClick={() => addFavorites(gifItem)}>
-            <FavIcon />
-          </div>
+        <div className="button-gif">
+          <img
+            className="img-gifs"
+            src={gifItem.images.original.url}
+            onClick={() => {
+              setCurrentGif(gifItem);
+              setShowModal(!showModal);
+            }}
+            alt=""
+          />
+
+          <span className="overlay" onClick={() => addFavorites(gifItem)}>
+            {`Add to Favorites`}
+          </span>
         </div>
       </div>
     );
