@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "../pages/index";
-import Favorites from '../pages/Favorites'
+import Favorites from "../pages/Favorites/Favorites";
 
 export default function Routes() {
   return (
