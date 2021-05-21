@@ -8,6 +8,7 @@ export default function Gifs({ gifsInfo }) {
   const [currentGif, setCurrentGif] = useState();
 
   function addFavorites(gifsInfo) {
+    // cria um novo objeto com todas as informacoes do gif
     const newGif = {
       id: gifsInfo.id,
       title: gifsInfo.title,
@@ -29,11 +30,13 @@ export default function Gifs({ gifsInfo }) {
     // lista vazia pra armazenar os gifs favoritados
     let storedFavoriteGifs = [];
 
+    // adiciona na lista os gifs
     if (window.localStorage.favoriteGifs) {
       storedFavoriteGifs = JSON.parse(window.localStorage.favoriteGifs);
       storedFavoriteGifs = storedFavoriteGifs.list;
     }
 
+    // cria o nome da lista e cria/atualiza a lista de gifs
     window.localStorage.setItem(
       "favoriteGifs",
       JSON.stringify({ list: [...storedFavoriteGifs, newGif] })

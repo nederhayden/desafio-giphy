@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import { ModalContext } from "../../contexts/ModalContext";
-// import "./Favorites.scss";
 import "./Favorites.scss";
 
 export default function Favorites() {
   const { favoriteGifs, removeGif } = useContext(ModalContext);
   const [myGifs, setMyGifs] = useState([]);
 
+  
   function handleRemoveGif(id) {
     const gifId = id;
     const result = myGifs.filter((gif) => gif.id !== gifId);
