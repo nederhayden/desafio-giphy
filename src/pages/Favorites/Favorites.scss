@@ -5,7 +5,7 @@ h4 {
 
 .wrapper {
   justify-content: center;
-  background: #282a36;
+  background: rgba(0, 0, 0, 0.1);
   margin: 0;
   padding-left: 0;
   padding-right: 0;
@@ -13,7 +13,7 @@ h4 {
 
 .wrapper-favorites {
   display: flex;
-  background: rgba(0, 0, 0, 0.1);
+  background: #282a36;
   flex-wrap: wrap;
   justify-content: center;
 }
