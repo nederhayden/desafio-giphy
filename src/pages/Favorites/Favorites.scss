@@ -17,24 +17,3 @@ h4 {
   flex-wrap: wrap;
   justify-content: center;
 }
-
-.button-gif:hover .overlay {
-  opacity: 1;
-}
-
-.overlay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  background: rgba(0, 0, 0, 0.85);
-  border-radius: 0 0 4px 4px;
-  color: #fff;
-  width: 100%;
-  transition: 0.5s ease;
-  opacity: 0;
-  bottom: 0;
-  font-size: 14px;
-  padding: 12px;
-  text-align: center;
-}
