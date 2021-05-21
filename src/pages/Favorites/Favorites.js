@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import { ModalContext } from "../../contexts/ModalContext";
 // import "./Favorites.scss";
-import "../../pages/Favorites/Favorites.scss";
+import "./Favorites.scss";
 
 export default function Favorites() {
   const { favoriteGifs, removeGif } = useContext(ModalContext);
@@ -22,25 +22,32 @@ export default function Favorites() {
 
   function renderGifsFavorites() {
     return (
-      <div>
-        <h1>Lista de Favoritos</h1>
-        <br />
-
-        <div>
-          {myGifs.length
-            ? myGifs.map((gif, index) => (
-                <div className="wrapper" key={index}>
-                  <img
-                    className="img-gifs"
-                    src={gif.image}
-                    onClick={() => handleRemoveGif(gif.id)}
-                    alt=""
-                  />
-                </div>
-              ))
-            : "Add GIF's to favorites for view"}
+      <>
+        <div className="wrapper">
+          <h1>Lista de Favoritos</h1>
         </div>
-      </div>
+
+        <br />
+        <div className="wrapper-favorites">
+          {myGifs.length ? (
+            myGifs.map((gif, index) => (
+              <div key={index}>
+                <div className="button-gif">
+                  <img className="img-gifs" src={gif.image} alt="" />
+                  <span
+                    className="overlay"
+                    onClick={() => handleRemoveGif(gif.id)}
+                  >
+                    {`Remove to Favorites`}
+                  </span>
+                </div>
+              </div>
+            ))
+          ) : (
+            <h4>Add GIF's to favorites for view</h4>
+          )}
+        </div>
+      </>
     );
   }
 
