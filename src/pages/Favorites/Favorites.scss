@@ -3,6 +3,11 @@ h4 {
   color: #fff;
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+}
+
 .wrapper {
   justify-content: center;
   background: rgba(0, 0, 0, 0.1);

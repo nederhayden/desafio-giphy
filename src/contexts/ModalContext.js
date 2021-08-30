@@ -29,6 +29,24 @@ export default function ModalContextProvider({ children }) {
     );
   }
 
+  function renameGif(id, value) {
+    const gifId = id;
+    const gifTitle = value;
+    const gif = favoriteGifs.find((gif) => gif.id === gifId);
+    gif.title = gifTitle;
+
+    const updatedList = favoriteGifs.map((item) => {
+      if (item.id === gifId) item.title = gifTitle;
+      return item;
+    });
+    setFavoriteGifs(updatedList);
+
+    window.localStorage.setItem(
+      "favoriteGifs",
+      JSON.stringify({ list: updatedList })
+    );
+  }
+
   return (
     // Value: todos os valores que quero deixar exposto/acessível
     <ModalContext.Provider
@@ -38,6 +56,7 @@ export default function ModalContextProvider({ children }) {
         favoriteGifs,
         setFavoriteGifs,
         removeGif,
+        renameGif
       }}
     >
       {children}
